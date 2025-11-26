@@ -45,76 +45,80 @@ export default async function CoursePage({
   const quizData = currentLesson?.quizzes?.[0] // Pega o quiz se existir
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen bg-slate-950 overflow-hidden">
-      
-      {/* Coluna Esquerda: Player e Conteúdo */}
-      <div className="flex-1 flex flex-col overflow-y-auto">
-        <div className="p-4 sm:p-6">
-          <Link href="/dashboard" className="text-xs sm:text-sm text-slate-400 hover:text-primary mb-4 inline-flex items-center gap-1 transition-colors">
-            ← Voltar para Dashboard
-          </Link>
-          
-          <h1 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">{course.title}</h1>
+    <div className="w-full max-w-full overflow-x-hidden min-h-screen bg-slate-950">
+      <div className="flex flex-col lg:flex-row w-full">
+        
+        {/* Coluna Esquerda: Player e Conteúdo - Mobile-First */}
+        <div className="flex-1 w-full flex flex-col">
+          <div className="w-full px-4 py-4 sm:px-6 sm:py-6">
+            <Link href="/dashboard" className="text-xs sm:text-sm text-slate-400 hover:text-primary mb-4 inline-flex items-center gap-1 transition-colors">
+              ← Voltar para Dashboard
+            </Link>
+            
+            <h1 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">{course.title}</h1>
 
-          {/* ÁREA DO PLAYER / QUIZ */}
-          <div className="w-full bg-black rounded-xl sm:rounded-2xl overflow-hidden border border-slate-800 shadow-2xl relative" style={{ aspectRatio: '16/9', minHeight: '250px' }}>
-            {/* Aqui usamos um Wrapper Client Component para gerenciar a troca Vídeo <-> Quiz */}
-            <QuizWrapper 
-              userId={user.id}
-              lessonTitle={currentLesson?.title || 'Aula'}
-              videoUrl={currentLesson?.video_url}
-              quizId={quizData?.id} // Passa o ID do quiz se existir
-            />
-          </div>
-
-          <div className="mt-4 sm:mt-6">
-            <h2 className="text-lg sm:text-xl font-semibold text-white mb-2">
-              {currentLesson?.title || 'Selecione uma aula'}
-            </h2>
-            <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-              Assista ao conteúdo completo antes de iniciar o desafio. 
-              A pontuação deste módulo conta para seu certificado final.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Coluna Direita: Sidebar (Playlist) - Mobile: Bottom Sheet, Desktop: Sidebar */}
-      <div className="w-full lg:w-96 bg-slate-900/50 border-t lg:border-l lg:border-t-0 border-slate-800 lg:flex flex-col overflow-y-auto max-h-[40vh] lg:max-h-none">
-        <div className="p-4 sm:p-6 border-b border-slate-800">
-          <h3 className="font-bold text-white text-sm sm:text-base">Conteúdo do Curso</h3>
-          <p className="text-xs text-slate-500 mt-1">{course.modules?.length || 0} Módulos • 0% Concluído</p>
-        </div>
-
-        <div className="flex-1 p-3 sm:p-4 space-y-3 sm:space-y-4">
-          {course.modules?.map((module: any) => (
-            <div key={module.id} className="space-y-2">
-              <p className="text-xs font-bold text-slate-500 uppercase tracking-wider px-2">
-                {module.title}
-              </p>
-              <div className="space-y-1">
-                {module.lessons?.sort((a: any, b: any) => a.order_index - b.order_index).map((lesson: any) => {
-                  const isActive = lesson.id === currentLesson?.id
-                  return (
-                    <button 
-                      key={lesson.id}
-                      className={`w-full flex items-center gap-3 p-3 rounded-lg text-left transition-all ${
-                        isActive 
-                          ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400' 
-                          : 'hover:bg-white/5 text-slate-400'
-                      }`}
-                    >
-                      {isActive ? <PlayCircle className="w-4 h-4" /> : <Lock className="w-4 h-4 opacity-50" />}
-                      <span className="text-sm font-medium truncate flex-1">{lesson.title}</span>
-                      {lesson.quizzes?.length > 0 && (
-                        <Trophy className="w-3 h-3 text-yellow-500" />
-                      )}
-                    </button>
-                  )
-                })}
+            {/* ÁREA DO PLAYER / QUIZ - Responsivo para Landscape */}
+            <div className="w-full max-w-full bg-black rounded-xl sm:rounded-2xl overflow-hidden border border-slate-800 shadow-2xl relative">
+              {/* Container com aspect-ratio que funciona em landscape */}
+              <div className="w-full aspect-video min-h-[200px] sm:min-h-[300px] landscape:min-h-[250px]">
+                <QuizWrapper 
+                  userId={user.id}
+                  lessonTitle={currentLesson?.title || 'Aula'}
+                  videoUrl={currentLesson?.video_url}
+                  quizId={quizData?.id}
+                />
               </div>
             </div>
-          ))}
+
+            <div className="mt-4 sm:mt-6">
+              <h2 className="text-lg sm:text-xl font-semibold text-white mb-2">
+                {currentLesson?.title || 'Selecione uma aula'}
+              </h2>
+              <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
+                Assista ao conteúdo completo antes de iniciar o desafio. 
+                A pontuação deste módulo conta para seu certificado final.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Coluna Direita: Sidebar (Playlist) - Mobile: Bottom, Desktop: Sidebar */}
+        <div className="w-full lg:w-96 bg-slate-900/50 border-t lg:border-l lg:border-t-0 border-slate-800 lg:flex flex-col lg:overflow-y-auto max-h-[50vh] lg:max-h-screen">
+          <div className="p-4 sm:p-6 border-b border-slate-800">
+            <h3 className="font-bold text-white text-sm sm:text-base">Conteúdo do Curso</h3>
+            <p className="text-xs text-slate-500 mt-1">{course.modules?.length || 0} Módulos • 0% Concluído</p>
+          </div>
+
+          <div className="flex-1 p-3 sm:p-4 space-y-3 sm:space-y-4 overflow-y-auto">
+            {course.modules?.map((module: any) => (
+              <div key={module.id} className="space-y-2">
+                <p className="text-xs font-bold text-slate-500 uppercase tracking-wider px-2">
+                  {module.title}
+                </p>
+                <div className="space-y-1">
+                  {module.lessons?.sort((a: any, b: any) => a.order_index - b.order_index).map((lesson: any) => {
+                    const isActive = lesson.id === currentLesson?.id
+                    return (
+                      <button 
+                        key={lesson.id}
+                        className={`w-full flex items-center gap-3 p-3 rounded-lg text-left transition-all ${
+                          isActive 
+                            ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400' 
+                            : 'hover:bg-white/5 text-slate-400'
+                        }`}
+                      >
+                        {isActive ? <PlayCircle className="w-4 h-4 flex-shrink-0" /> : <Lock className="w-4 h-4 opacity-50 flex-shrink-0" />}
+                        <span className="text-sm font-medium truncate flex-1">{lesson.title}</span>
+                        {lesson.quizzes?.length > 0 && (
+                          <Trophy className="w-3 h-3 text-yellow-500 flex-shrink-0" />
+                        )}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

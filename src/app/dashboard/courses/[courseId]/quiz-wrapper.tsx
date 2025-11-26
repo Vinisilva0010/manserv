@@ -35,25 +35,28 @@ export default function QuizWrapper({ userId, lessonTitle, videoUrl, quizId }: Q
     )
   }
 
-  // MODO VÍDEO (Padrão)
+  // MODO VÍDEO (Padrão) - Responsivo para Landscape
   return (
-    <div className="w-full h-full relative group bg-black flex flex-col justify-center">
-      <div className="w-full aspect-video">
+    <div className="w-full h-full relative bg-black flex items-center justify-center">
+      <div className="w-full h-full">
         <iframe 
-          src={videoUrl?.replace('watch?v=', 'embed/')} 
-          className="w-full h-full object-cover"
+          src={videoUrl?.replace('watch?v=', 'embed/').replace('youtu.be/', 'youtube.com/embed/')} 
+          className="w-full h-full"
           allowFullScreen
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           title={lessonTitle}
         />
       </div>
 
+      {/* Botão do Quiz - Posicionamento responsivo */}
       {quizId && (
-        <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 z-10">
+        <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 md:bottom-6 md:right-6 z-20">
           <button
             onClick={() => setMode('quiz')}
-            className="flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-emerald-500 to-emerald-400 text-slate-950 font-bold rounded-full shadow-lg shadow-emerald-500/20 hover:scale-105 active:scale-95 transition-all md:animate-pulse text-xs md:text-base"
+            className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 bg-gradient-to-r from-emerald-500 to-emerald-400 text-slate-950 font-bold rounded-full shadow-lg shadow-emerald-500/20 hover:scale-105 active:scale-95 transition-all md:animate-pulse text-xs sm:text-sm md:text-base"
+            aria-label="Iniciar Quiz"
           >
-            <Trophy className="w-4 h-4 md:w-5 md:h-5" />
+            <Trophy className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
             <span className="hidden md:inline">Desafiar Conhecimento</span>
             <span className="md:hidden">Fazer Quiz</span>
           </button>

@@ -24,8 +24,8 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="flex min-h-screen bg-slate-950 text-white">
-      {/* Sidebar - Mobile: Hamburger Menu, Desktop: Sidebar Fixa */}
+    <div className="flex min-h-screen bg-slate-950 text-white w-full max-w-full overflow-x-hidden">
+      {/* Sidebar - TOTALMENTE OCULTA NO MOBILE */}
       <aside className="hidden lg:flex w-64 border-r border-slate-800 bg-slate-950/50 backdrop-blur-xl flex-col fixed h-full z-10">
         
         {/* Logo Area */}
@@ -83,8 +83,8 @@ export default async function DashboardLayout({
         </div>
       </aside>
 
-      {/* Mobile Header */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 bg-slate-950/95 backdrop-blur-xl border-b border-slate-800 z-20 p-4">
+      {/* Mobile Header - Fixo no topo */}
+      <header className="lg:hidden fixed top-0 left-0 right-0 bg-slate-950/95 backdrop-blur-xl border-b border-slate-800 z-20 px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="bg-primary/20 p-2 rounded-lg neon-glow border border-primary/30">
@@ -96,15 +96,15 @@ export default async function DashboardLayout({
             </div>
           </div>
           <form action={signOut}>
-            <button className="p-2 text-slate-400 hover:text-red-400 transition-colors">
+            <button className="p-2 text-slate-400 hover:text-red-400 transition-colors" aria-label="Sair">
               <LogOut className="w-5 h-5" />
             </button>
           </form>
         </div>
       </header>
 
-      {/* Main Content Area */}
-      <main className="flex-1 lg:ml-64 p-4 sm:p-6 lg:p-8 pt-20 lg:pt-8">
+      {/* Main Content Area - Mobile-First com padding adequado */}
+      <main className="flex-1 w-full lg:ml-64 min-h-screen px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8 pt-16 lg:pt-8">
         {children}
       </main>
     </div>
