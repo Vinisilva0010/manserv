@@ -57,7 +57,7 @@ export default async function CoursePage({
           <h1 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">{course.title}</h1>
 
           {/* ÁREA DO PLAYER / QUIZ */}
-          <div className="aspect-video bg-black rounded-xl sm:rounded-2xl overflow-hidden border border-slate-800 shadow-2xl relative">
+          <div className="w-full bg-black rounded-xl sm:rounded-2xl overflow-hidden border border-slate-800 shadow-2xl relative" style={{ aspectRatio: '16/9', minHeight: '250px' }}>
             {/* Aqui usamos um Wrapper Client Component para gerenciar a troca Vídeo <-> Quiz */}
             <QuizWrapper 
               userId={user.id}
