@@ -38,17 +38,34 @@ export default function LoginPage() {
   const currentAction = isSignup ? signupAction : loginAction
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-4">
-      <div className="glass rounded-2xl p-8 w-full max-w-md border border-white/10 shadow-2xl backdrop-blur-md bg-white/5">
-        {/* Logo */}
-        <div className="flex flex-col items-center mb-8">
-          <div className="bg-emerald-500/20 p-4 rounded-full mb-4 neon-glow border border-emerald-500/30">
-            <Shield className="w-8 h-8 text-emerald-400" />
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-4 sm:p-6">
+      {/* Logo Manserv Destacado no Topo */}
+      <div className="mb-8 sm:mb-12 text-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="relative">
+            <div className="bg-gradient-to-br from-primary/30 via-primary/20 to-primary/10 p-6 sm:p-8 rounded-3xl mb-4 neon-glow-strong border-2 border-primary/50 shadow-2xl shadow-primary/20">
+              <Shield className="w-12 h-12 sm:w-16 sm:h-16 text-primary" />
+            </div>
+            <div className="absolute -inset-1 bg-primary/20 rounded-3xl blur-xl -z-10 animate-pulse" />
           </div>
-          <h1 className="text-2xl font-bold text-white mb-2">
-            Manserv Safety
-          </h1>
-          <p className="text-sm text-slate-400">
+          <div className="space-y-2">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight">
+              <span className="text-primary text-glow">MANSERV</span>
+            </h1>
+            <p className="text-lg sm:text-xl text-primary font-semibold tracking-wider">
+              SAFETY
+            </p>
+            <p className="text-xs sm:text-sm text-slate-400 mt-2">
+              Plataforma de Treinamento Corporativo
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Card de Login */}
+      <div className="glass rounded-2xl p-6 sm:p-8 w-full max-w-md border border-white/10 shadow-2xl backdrop-blur-md bg-white/5">
+        <div className="text-center mb-6">
+          <p className="text-sm sm:text-base text-slate-300">
             {isSignup ? 'Crie sua conta corporativa' : 'Acesse o painel de treinamento'}
           </p>
         </div>
@@ -62,7 +79,7 @@ export default function LoginPage() {
         )}
 
         {/* Form */}
-        <form action={currentAction} className="space-y-4">
+        <form action={currentAction} className="space-y-4 sm:space-y-5">
           {/* Email Input */}
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium text-slate-300">

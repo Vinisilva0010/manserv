@@ -14,17 +14,17 @@ export default async function DashboardPage() {
     .order('created_at', { ascending: false })
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-white mb-2">
+        <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
           Bem-vindo, <span className="text-primary">Time Manserv</span>
         </h1>
-        <p className="text-slate-400">Seu progresso de segurança hoje salva vidas amanhã.</p>
+        <p className="text-sm sm:text-base text-slate-400">Seu progresso de segurança hoje salva vidas amanhã.</p>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         <div className="glass p-6 rounded-2xl border border-white/5 bg-white/5 hover:border-primary/30 transition-colors">
           <div className="flex justify-between items-start mb-4">
             <div className="p-2 bg-primary/20 rounded-lg">
@@ -67,7 +67,7 @@ export default async function DashboardPage() {
             </span>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {courses.map((course) => (
               <CourseCard key={course.id} course={course} />
             ))}

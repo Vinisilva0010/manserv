@@ -45,19 +45,19 @@ export default async function CoursePage({
   const quizData = currentLesson?.quizzes?.[0] // Pega o quiz se existir
 
   return (
-    <div className="flex h-screen bg-slate-950 overflow-hidden">
+    <div className="flex flex-col lg:flex-row h-screen bg-slate-950 overflow-hidden">
       
       {/* Coluna Esquerda: Player e Conteúdo */}
       <div className="flex-1 flex flex-col overflow-y-auto">
-        <div className="p-6">
-          <Link href="/dashboard" className="text-sm text-slate-400 hover:text-emerald-400 mb-4 inline-flex items-center gap-1">
+        <div className="p-4 sm:p-6">
+          <Link href="/dashboard" className="text-xs sm:text-sm text-slate-400 hover:text-primary mb-4 inline-flex items-center gap-1 transition-colors">
             ← Voltar para Dashboard
           </Link>
           
-          <h1 className="text-2xl font-bold text-white mb-6">{course.title}</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">{course.title}</h1>
 
           {/* ÁREA DO PLAYER / QUIZ */}
-          <div className="aspect-video bg-black rounded-2xl overflow-hidden border border-slate-800 shadow-2xl relative">
+          <div className="aspect-video bg-black rounded-xl sm:rounded-2xl overflow-hidden border border-slate-800 shadow-2xl relative">
             {/* Aqui usamos um Wrapper Client Component para gerenciar a troca Vídeo <-> Quiz */}
             <QuizWrapper 
               userId={user.id}
@@ -67,11 +67,11 @@ export default async function CoursePage({
             />
           </div>
 
-          <div className="mt-6">
-            <h2 className="text-xl font-semibold text-white mb-2">
+          <div className="mt-4 sm:mt-6">
+            <h2 className="text-lg sm:text-xl font-semibold text-white mb-2">
               {currentLesson?.title || 'Selecione uma aula'}
             </h2>
-            <p className="text-slate-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
               Assista ao conteúdo completo antes de iniciar o desafio. 
               A pontuação deste módulo conta para seu certificado final.
             </p>
@@ -79,14 +79,14 @@ export default async function CoursePage({
         </div>
       </div>
 
-      {/* Coluna Direita: Sidebar (Playlist) */}
-      <div className="w-96 bg-slate-900/50 border-l border-slate-800 hidden lg:flex flex-col overflow-y-auto">
-        <div className="p-6 border-b border-slate-800">
-          <h3 className="font-bold text-white">Conteúdo do Curso</h3>
-          <p className="text-xs text-slate-500 mt-1">2 Módulos • 0% Concluído</p>
+      {/* Coluna Direita: Sidebar (Playlist) - Mobile: Bottom Sheet, Desktop: Sidebar */}
+      <div className="w-full lg:w-96 bg-slate-900/50 border-t lg:border-l lg:border-t-0 border-slate-800 lg:flex flex-col overflow-y-auto max-h-[40vh] lg:max-h-none">
+        <div className="p-4 sm:p-6 border-b border-slate-800">
+          <h3 className="font-bold text-white text-sm sm:text-base">Conteúdo do Curso</h3>
+          <p className="text-xs text-slate-500 mt-1">{course.modules?.length || 0} Módulos • 0% Concluído</p>
         </div>
 
-        <div className="flex-1 p-4 space-y-4">
+        <div className="flex-1 p-3 sm:p-4 space-y-3 sm:space-y-4">
           {course.modules?.map((module: any) => (
             <div key={module.id} className="space-y-2">
               <p className="text-xs font-bold text-slate-500 uppercase tracking-wider px-2">

@@ -25,15 +25,18 @@ export default async function DashboardLayout({
 
   return (
     <div className="flex min-h-screen bg-slate-950 text-white">
-      {/* Sidebar */}
-      <aside className="w-64 border-r border-slate-800 bg-slate-950/50 backdrop-blur-xl flex flex-col fixed h-full z-10">
+      {/* Sidebar - Mobile: Hamburger Menu, Desktop: Sidebar Fixa */}
+      <aside className="hidden lg:flex w-64 border-r border-slate-800 bg-slate-950/50 backdrop-blur-xl flex-col fixed h-full z-10">
         
         {/* Logo Area */}
         <div className="p-6 border-b border-slate-800 flex items-center gap-3">
-          <div className="bg-emerald-500/10 p-2 rounded-lg">
-            <Shield className="w-6 h-6 text-emerald-400" />
+          <div className="bg-primary/20 p-2 rounded-lg neon-glow border border-primary/30">
+            <Shield className="w-6 h-6 text-primary" />
           </div>
-          <span className="font-bold text-lg tracking-tight">Manserv Safety</span>
+          <div className="flex flex-col">
+            <span className="font-black text-lg tracking-tight text-primary">MANSERV</span>
+            <span className="text-xs text-slate-400 -mt-1">SAFETY</span>
+          </div>
         </div>
 
         {/* Navigation */}
@@ -80,8 +83,28 @@ export default async function DashboardLayout({
         </div>
       </aside>
 
+      {/* Mobile Header */}
+      <header className="lg:hidden fixed top-0 left-0 right-0 bg-slate-950/95 backdrop-blur-xl border-b border-slate-800 z-20 p-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="bg-primary/20 p-2 rounded-lg neon-glow border border-primary/30">
+              <Shield className="w-5 h-5 text-primary" />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-black text-base tracking-tight text-primary">MANSERV</span>
+              <span className="text-xs text-slate-400 -mt-1">SAFETY</span>
+            </div>
+          </div>
+          <form action={signOut}>
+            <button className="p-2 text-slate-400 hover:text-red-400 transition-colors">
+              <LogOut className="w-5 h-5" />
+            </button>
+          </form>
+        </div>
+      </header>
+
       {/* Main Content Area */}
-      <main className="flex-1 ml-64 p-8">
+      <main className="flex-1 lg:ml-64 p-4 sm:p-6 lg:p-8 pt-20 lg:pt-8">
         {children}
       </main>
     </div>
