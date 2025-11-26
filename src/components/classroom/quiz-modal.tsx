@@ -15,16 +15,6 @@ interface QuizModalProps {
 }
 
 export function QuizModal({ isOpen, onClose, quizId, userId, onComplete }: QuizModalProps) {
-  const handleComplete = (totalScore: number) => {
-    if (onComplete) {
-      onComplete(totalScore)
-    }
-    // Fechar modal após um delay para mostrar a tela final
-    setTimeout(() => {
-      onClose()
-    }, 3000)
-  }
-
   return (
     <AnimatePresence>
       {isOpen && (
@@ -61,7 +51,6 @@ export function QuizModal({ isOpen, onClose, quizId, userId, onComplete }: QuizM
               <QuizEngine
                 quizId={quizId}
                 userId={userId}
-                onComplete={handleComplete}
               />
             </div>
           </motion.div>
